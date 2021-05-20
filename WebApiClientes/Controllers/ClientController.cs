@@ -28,9 +28,9 @@ namespace WebApiClientes.Controllers
         }
 
         [HttpGet("{id}")]
-        public ClientDto FindClient(ClientDto client)
+        public ClientDto FindClient(int id)
         {
-            ClientDto clientDto = _clientRepo.FindClient(client.idClient);
+            ClientDto clientDto = _clientRepo.FindClient(id);
             return clientDto;
         }
 
