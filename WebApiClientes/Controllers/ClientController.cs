@@ -49,9 +49,9 @@ namespace WebApiClientes.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ClientDto DeleteClient(ClientDto clientUp)
+        public ClientDto DeleteClient([FromRoute]int id)
         {
-            ClientDto clientDto = _clientRepo.DeleteClient(clientUp);
+            ClientDto clientDto = _clientRepo.DeleteClient(id);
             return clientDto;
         }
     }

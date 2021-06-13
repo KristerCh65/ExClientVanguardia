@@ -11,7 +11,7 @@ namespace WebApiClientes.Infraestructura
     {
         public List<ClientDto> GetDataClient();
         public ClientDto addDataClient(ClientDto dataClient);
-        public ClientDto DeleteClient(ClientDto dataClient);
+        public ClientDto DeleteClient(int idClient);
         public ClientDto UpdateClient(ClientDto clientDto);
         public ClientDto FindClient(int dataClient);
     }

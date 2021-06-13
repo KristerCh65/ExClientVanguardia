@@ -28,7 +28,8 @@ namespace WebApiClientes.Infraestructura
                     idClient = cliente.idClient,
                     name = cliente.name,
                     civilStatus = cliente.civilStatus,
-                    birthDate = cliente.birthDate
+                    birthDate = cliente.birthDate,
+                    activo = cliente.activo
                 });
             }
 
@@ -64,7 +65,8 @@ namespace WebApiClientes.Infraestructura
                 {
                     name = newClient.name,
                     civilStatus = newClient.civilStatus,
-                    birthDate = newClient.birthDate
+                    birthDate = newClient.birthDate,
+                    activo = newClient.activo
                 };
                 _context.clientModels.Add(cliente);
                 _context.SaveChanges();
@@ -83,7 +85,7 @@ namespace WebApiClientes.Infraestructura
         {
             var register = _context.clientModels.FirstOrDefault(c => c.idClient == clientUp.idClient);
 
-            if (register != null)
+            if (register == null)
             {
                 return new ClientDto
                 {
@@ -95,16 +97,17 @@ namespace WebApiClientes.Infraestructura
             register.name = clientUp.name;
             register.civilStatus = clientUp.civilStatus;
             register.birthDate = clientUp.birthDate;
+            register.activo = clientUp.activo;
 
             _context.SaveChanges();
             return clientUp;
         }
 
-        public ClientDto DeleteClient(ClientDto clientUp)
+        public ClientDto DeleteClient(int clientId)
         {
-            var register = _context.clientModels.FirstOrDefault(c => c.idClient == clientUp.idClient);
+            var register = _context.clientModels.FirstOrDefault(c => c.idClient == clientId);
 
-            if (register != null)
+            if (register == null)
             {
                 return new ClientDto
                 {
@@ -114,7 +117,11 @@ namespace WebApiClientes.Infraestructura
 
             _context.clientModels.Remove(register);
             _context.SaveChanges();
-            return clientUp;
+
+            return new ClientDto
+            {
+                errorMessage = "Success"
+            };
         }
 
 
